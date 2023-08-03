@@ -1,19 +1,23 @@
-Here is a README for a GitHub repo for this Node.js library:
+# ClaudeAI-API ( Unofficial )
 
-# Claude.js
-
-A Node.js library for interacting with the Claude.ai API.
+A Node.js unofficial library for interacting with the Claude.ai API.
 
 ## Installation
 
 ```bash
-npm install claudejs
+npm install github:nalyk/claude-api
 ```
+## Cookie
+* You can get cookie from the browser's developer tools network tab ( see for any claude.ai requests check out cookie ,copy whole value ) or storage tab ( You can find cookie of claude.ai ,there will be four values )
+
+* (Checkout below image for the format of cookie ,It is Better to Use from network tab to grab cookie easily )
+
+   ![Screenshot (8)](https://github.com/KoushikNavuluri/Claude-API/assets/103725723/355971e3-f46c-47fc-a3cf-008bb55bb4c6)
 
 ## Usage
 
 ```js
-const Claude = require('claudejs');
+const Claude = require('github:nalyk/claude-api');
 
 const client = new Claude('session_cookie');
 
