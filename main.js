@@ -9,6 +9,20 @@ class Client {
     this.organizationId = this.getOrganizationId();
   }
 
+  getHeaders() {
+    return {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0',
+      'Accept-Language': 'en-US,en;q=0.5',
+      'Referer': 'https://claude.ai/chats',  
+      'Content-Type': 'application/json',
+      'Sec-Fetch-Dest': 'empty',
+      'Sec-Fetch-Mode': 'cors',
+      'Sec-Fetch-Site': 'same-origin',
+      'Connection': 'keep-alive',
+      'Cookie': `${this.cookie}`
+    };
+  }
+
   getOrganizationId() {
     const url = 'https://claude.ai/api/organizations';
     
@@ -24,41 +38,42 @@ class Client {
       'Cookie': `${this.cookie}`
     };
 
-    return new Promise((resolve, reject) => {
-      const req = https.request(url, { headers }, (res) => {
-        let data = '';
+  return new Promise((resolve, reject) => {
+    const req = https.request(url, { headers }, (res) => {
+      let data = '';
 
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
 
-        res.on('end', () => {
+      res.on('end', () => {
+        try {
           const res = JSON.parse(data);
           const uuid = res[0].uuid;
           resolve(uuid);
-        });
+        } catch (error) {
+          reject(new Error('Error parsing response data'));
+        }
       });
-
-      req.on('error', (error) => {
-        reject(error);
-      });
-
-      req.end();
     });
+
+    req.on('error', (error) => {
+      reject(new Error(`Request error: ${error.message}`));
+    });
+
+    req.end();
+  });
   }
 
   getContentType(filePath) {
     const extension = path.extname(filePath).toLowerCase();
+    const contentTypes = {
+      '.pdf': 'application/pdf',
+      '.txt': 'text/plain',
+      '.csv': 'text/csv'
+    };
 
-    if (extension === '.pdf') {
-      return 'application/pdf';
-    } else if (extension === '.txt') {
-      return 'text/plain'; 
-    } else if (extension === '.csv') {
-      return 'text/csv';
-    } else {
-      return 'application/octet-stream';
-    }
+    return contentTypes[extension] || 'application/octet-stream';
   }
 
   listAllConversations() {
