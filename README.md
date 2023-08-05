@@ -5,7 +5,7 @@ A Node.js unofficial library for interacting with the Claude.ai API.
 ## Installation
 
 ```bash
-npm install github:nalyk/claude-api
+npm install claude-no-api
 ```
 ## Cookie
 * You can get cookie from the browser's developer tools network tab ( see for any claude.ai requests check out cookie ,copy whole value ) or storage tab ( You can find cookie of claude.ai ,there will be four values )
