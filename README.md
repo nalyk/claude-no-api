@@ -17,7 +17,7 @@ npm install claude-no-api
 ## Usage
 
 ```js
-const Claude = require('github:nalyk/claude-api');
+const Claude = require('claude-no-api');
 
 const client = new Claude('session_cookie');
 
