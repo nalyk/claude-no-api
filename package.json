@@ -1,5 +1,5 @@
 {
-  "name": "claude-api",
+  "name": "claude-no-api",
   "version": "1.0.1",
   "description": "Node.js library for Claude.ai API",
   "main": "main.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nalyk/claude-api.git"
+    "url": "git+https://github.com/nalyk/claude-no-api.git"
   },
   "keywords": [
     "claude",
@@ -19,9 +19,9 @@
   "author": "Nalyk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nalyk/claude-api/issues"
+    "url": "https://github.com/nalyk/claude-no-api/issues"
   },
-  "homepage": "https://github.com/nalyk/claude-api#readme",
+  "homepage": "https://github.com/nalyk/claude-no-api#readme",
   "dependencies": {
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
