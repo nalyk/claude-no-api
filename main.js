@@ -49,8 +49,12 @@ class Client {
       res.on('end', () => {
         try {
           const res = JSON.parse(data);
-          const uuid = res[0].uuid;
-          resolve(uuid);
+          if (res[0] && res[0].uuid) {
+            const uuid = res[0].uuid;
+            resolve(uuid);
+          } else {
+            reject(new Error('Invalid UUID'));
+          }
         } catch (error) {
           reject(new Error('Error parsing response data'));
         }
@@ -359,7 +363,11 @@ class Client {
 
     const formData = {
       file: fs.createReadStream(filePath),
-      orgUuid: this.organizationId  
+      if (this.organizationId) {
+        orgUuid: this.organizationId  
+      } else {
+        reject(new Error('Invalid UUID'));
+      }
     };
 
     return new Promise((resolve, reject) => {
